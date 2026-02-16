@@ -5,7 +5,7 @@ Control of single elevator for TTK4145 Real-Time Programming at NTNU
 
 ## Overview
 
-This package contains an implementation for controlling a single elevator as a finite state machine,
+This project contains an implementation for controlling a single elevator as a finite state machine,
 using message passing between separate threads.
 
 The hardware polling, timer instance and fsm logic all run on separate threads,
