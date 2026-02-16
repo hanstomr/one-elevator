@@ -19,18 +19,14 @@ func main() {
 
 	// Output message channels for performing actions on elevator hardware
 	setFloorIndicator := make(chan int)
-
 	setLights := make(chan [elevator.N_FLOORS][elevator.N_BUTTONS]bool)
-
 	changeMotorDirection := make(chan elevator.MotorDirection)
-
 	openDoor := make(chan bool)
 	closeDoor := make(chan bool)
 	keepDoorOpen := make(chan bool)
 
-	// Output message channels for performing actions on timer instance
+	// Output message channel for performing action on timer instance
 	resetDoorTimer := make(chan bool)
-	stopInactivityTimer := make(chan bool)
 
 	// - - - - - - Initializing - - - - - - -
 
@@ -38,7 +34,7 @@ func main() {
 
 	// - - - - - - Deploying - - - - - - -
 
-	go timer.Timers(stopInactivityTimer, resetDoorTimer, doorTimeout)
+	go timer.DoorTimer(resetDoorTimer, doorTimeout)
 	go elevator.PollButtons(requestEvent)
 	go elevator.PollFloorSensor(floorEvent)
 
