@@ -6,20 +6,21 @@ Control of single elevator for TTK4145 Real-Time Programming at NTNU
 ## Overview
 
 This package contains an implementation for controlling a single elevator as a finite state machine,
-using message passing between separate threads
+using message passing between separate threads.
 
 The hardware polling, timer instance and fsm logic all run on separate threads,
 using message passing from the hardware and the timer to the fsm loop to signal events for triggering a state transition.
 
-Using message passing allows all fsm helper functions to be pure, since they can calculate the state transitions,
-signal the outputted actions on message channels and return the transitioned states to the main fsm loop.
+Although the fsm functions are not entirely pure, since they do affect the outside world,
+using message passing allows all the fsm helper functions to only indirectly affect the physical elevator,
+using channels to output the transition actions and returning the transitioned states to the main fsm loop.
 
 The action outputs are handled in main, which in turn performs the actions by messaging the timer and elevator packages,
 which actually do the work of setting the timers and executing the elevator commands.
 
 Structuring the program this way allows all the behavioural logic to be entirely contained within the fsm package,
 only needing the other packages for interacting with the outside world,
-and thus maintains a clean concept for what a computer program should do
+and thus maintains a clean concept for what a computer program should do.
 
 
 ## Dependencies
