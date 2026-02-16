@@ -22,4 +22,4 @@ and then run the elevator program:
 `go run main.go`
 
 Communication to the both the server and the simulator is over TCP,
-and this program is set up to use the default port options
+and this program is set up to use the default port options.
